@@ -6,7 +6,7 @@ RM	= rm -f
 
 LIBRARY = ./libft/
 
-SRC	= ft_printf.c ft_hexa.c ft_ptr.c check_type.c ft_utoa.c ft_printf_utils.c
+SRC	= ft_printf.c ft_hexa.c ft_ptr.c print_type.c ft_utoa.c ft_printf_utils.c
 
 OBJS	= $(SRC:.c=.o)
 

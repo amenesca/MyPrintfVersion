@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/30 15:47:40 by amenesca          #+#    #+#             */
+/*   Updated: 2022/05/31 08:37:36 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+void	ft_putnbr_fd(int n, int fd)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
-
-	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	if (n == -2147483648)
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
-		i++;
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		ft_putnbr_fd(147483648, fd);
 	}
-	va_end(argptr);
-	return (len);
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-n, fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+		ft_putchar_fd(n + '0', fd);
 }

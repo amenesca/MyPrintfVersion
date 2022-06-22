@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/06 08:20:41 by amenesca          #+#    #+#             */
+/*   Updated: 2022/06/01 12:45:04 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+char	*ft_strrchr(const char *s, int c)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	char	*temp;
+	char	*str;
+	size_t	i;
+	size_t	len;
 
+	len = ft_strlen(s);
+	str = (char *) s;
 	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	temp = NULL;
+	if (c == '\0')
+		return ((char *) s + len);
+	while (i < ft_strlen(str))
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
+		if (str[i] == (char) c)
+			temp = str + i;
 		i++;
+		if (str[i] == (char) c)
+			temp = str + i;
 	}
-	va_end(argptr);
-	return (len);
+	return (temp);
 }

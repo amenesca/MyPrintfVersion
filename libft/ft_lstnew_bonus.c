@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/06/01 08:49:44 by amenesca          #+#    #+#             */
+/*   Updated: 2022/06/01 12:49:31 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+t_list	*ft_lstnew(void *content)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	t_list	*list;
 
-	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
-	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
-		i++;
-	}
-	va_end(argptr);
-	return (len);
+	list = (t_list *) malloc(sizeof(t_list));
+	if (!list)
+		return (NULL);
+	list->content = content;
+	list->next = NULL;
+	return (list);
 }

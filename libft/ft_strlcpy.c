@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/12 16:42:58 by amenesca          #+#    #+#             */
+/*   Updated: 2022/05/21 15:13:05 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	size_t	i;
+	size_t	j;
 
-	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
-	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
-		i++;
-	}
-	va_end(argptr);
-	return (len);
+	j = ft_strlen(src) + 1;
+	i = dstsize - 1;
+	if (j < dstsize)
+		ft_memcpy(dst, src, j);
+	else if (dstsize > 0)
+		ft_memcpy(dst, src, i);
+	dst[i] = '\0';
+	return (j - 1);
 }

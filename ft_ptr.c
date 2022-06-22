@@ -6,11 +6,10 @@
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:36:18 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:37:49 by amenesca         ###   ########.fr       */
+/*   Updated: 2022/06/22 10:35:41 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "ft_printf.h"
 
 int	ft_ptr_len(unsigned long dec)
@@ -48,7 +47,7 @@ int	ft_check_ptr(unsigned long n, char type)
 
 	len = 0;
 	if (!n)
-		return (write(1, "0x0", 5));
+		return (write(1, "0x0", 3));
 	len += write(1, "0x", 2);
 	if (n)
 	{

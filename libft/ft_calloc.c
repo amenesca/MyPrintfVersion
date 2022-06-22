@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/16 10:57:49 by amenesca          #+#    #+#             */
+/*   Updated: 2022/06/01 12:47:25 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+void	*ft_calloc(size_t count, size_t size)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	void	*ptr;
+	size_t	total;
 
-	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	if (count == 0 || size == 0)
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
-		i++;
+		count = 1;
+		size = 1;
 	}
-	va_end(argptr);
-	return (len);
+	total = count * size;
+	if (total / count != size)
+		return (NULL);
+	ptr = malloc(total);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, total);
+	return (ptr);
 }

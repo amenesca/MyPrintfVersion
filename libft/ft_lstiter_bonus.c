@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/06/02 15:09:15 by amenesca          #+#    #+#             */
+/*   Updated: 2022/06/02 15:18:52 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
-
-	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	if (!lst || !f)
+		return ;
+	while (lst)
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
-		i++;
+		f(lst->content);
+		lst = lst->next;
 	}
-	va_end(argptr);
-	return (len);
 }

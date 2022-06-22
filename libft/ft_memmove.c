@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/06 15:09:54 by amenesca          #+#    #+#             */
+/*   Updated: 2022/05/21 15:33:14 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	char	*s;
+	char	*d;
 
-	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	s = (char *) src;
+	d = (char *) dst;
+	if (s == d || len == 0)
+		return (dst);
+	if (s < d)
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
-		i++;
+		s += len;
+		d += len;
+		while (len--)
+			*--d = *--s;
 	}
-	va_end(argptr);
-	return (len);
+	else
+	{
+		while (len--)
+			*d++ = *s++;
+	}
+	return (dst);
 }

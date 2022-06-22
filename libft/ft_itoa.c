@@ -1,42 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/18 08:57:29 by amenesca          #+#    #+#             */
+/*   Updated: 2022/05/26 15:56:02 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+static size_t	nbsize(int n)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	size_t	i;
 
 	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
-	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
+	if (n <= 0)
 		i++;
+	while (n != 0)
+	{
+		i++;
+		n = n / 10;
 	}
-	va_end(argptr);
-	return (len);
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{	
+	char	*str;
+	int		i;
+	long	x;
+
+	x = n;
+	i = nbsize(n);
+	str = malloc(i + 1);
+	if (str == NULL)
+		return (NULL);
+	if (x < 0)
+	{
+		str[0] = '-';
+		x = -x;
+	}
+	if (x == 0)
+		str[0] = '0';
+	str[i--] = '\0';
+	while (x)
+	{
+		str[i] = x % 10 + '0';
+		i--;
+		x = x / 10;
+	}
+	return (str);
 }

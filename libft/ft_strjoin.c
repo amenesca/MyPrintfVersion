@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/17 13:18:42 by amenesca          #+#    #+#             */
+/*   Updated: 2022/05/23 09:25:09 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	size_t	i;
+	size_t	j;
+	size_t	x;
+	char	*join;
 
+	j = 0;
 	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	x = ft_strlen(s1) + ft_strlen(s2) + 1;
+	join = (char *) malloc(x * sizeof(char));
+	if (!join)
+		return (NULL);
+	while (i < ft_strlen(s1))
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
+		join[i] = s1[i];
 		i++;
 	}
-	va_end(argptr);
-	return (len);
+	while (j < ft_strlen(s2))
+	{
+		join[i] = s2[j];
+		i++;
+		j++;
+	}
+	join[i] = '\0';
+	return (join);
 }

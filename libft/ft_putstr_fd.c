@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/30 15:25:05 by amenesca          #+#    #+#             */
+/*   Updated: 2022/05/30 15:30:45 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+void	ft_putstr_fd(char *s, int fd)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	size_t	len;
+	size_t	i;
 
 	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	len = ft_strlen(s);
+	while (i < len)
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
+		write(fd, &s[i], 1);
 		i++;
 	}
-	va_end(argptr);
-	return (len);
 }

@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/06 14:58:20 by amenesca          #+#    #+#             */
+/*   Updated: 2022/05/21 13:29:14 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	size_t		i;
+	char		*str;
 
+	str = (char *) s;
 	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	while (i < n)
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
+		if (str[i] == (char) c)
+			return (str + i);
 		i++;
 	}
-	va_end(argptr);
-	return (len);
+	return (NULL);
 }

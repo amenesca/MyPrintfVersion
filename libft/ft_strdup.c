@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenesca <amenesca@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 18:31:01 by amenesca          #+#    #+#             */
-/*   Updated: 2022/06/21 18:32:40 by amenesca         ###   ########.fr       */
+/*   Created: 2022/05/16 13:32:05 by amenesca          #+#    #+#             */
+/*   Updated: 2022/06/01 12:44:20 by amenesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+char	*ft_strdup(const char *s1)
 {
-	va_list	argptr;
-	int		i;
-	int		len;
-	int		c;
+	size_t	i;
+	char	*s;
 
+	s = (char *) malloc((ft_strlen(s1) + 1) * sizeof(char));
+	if (!s)
+		return (NULL);
 	i = 0;
-	len = 0;
-	va_start(argptr, str);
-	while (str[i] != '\0')
+	while (i <= ft_strlen(s1))
 	{
-		if (str[i] == '%')
-		{
-			len += print_type(argptr, str[i + 1]);
-			i++;
-		}
-		else
-		{
-			c = str[i];
-			ft_putchar(c);
-			len++;
-		}
+		s[i] = s1[i];
 		i++;
 	}
-	va_end(argptr);
-	return (len);
+	return ((char *)(s));
 }
