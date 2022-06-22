@@ -23,12 +23,12 @@ int		ft_check_hexa(unsigned int n, char type);
 int		ft_ptr_len(unsigned long dec);
 void	ft_hexa_ptr(unsigned long dec, char type);
 int		ft_check_ptr(unsigned long n, char type);
-size_t	measure_to_str(int n);
 char	*ft_utoa(unsigned int n);
 int		ft_putchar(char c);
 int		ft_putstr(char *str);
 int		ft_nbr_u(unsigned int number);
 int		ft_itoa_count(int n);
 int		print_type(va_list argptr, char type);
+size_t	ft_unsigned_len(unsigned int n);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-size_t	measure_unsigned(unsigned int n)
+size_t	ft_unsigned_len(unsigned int n)
 {
 	size_t	n_len;
 
@@ -30,7 +30,7 @@ char	*ft_utoa(unsigned int n)
 	size_t	n_len;
 	char	*str;
 
-	n_len = measure_unsigned(n);
+	n_len = ft_unsigned_len(n);
 	str = malloc(n_len + 1);
 	if (!str)
 		return (NULL);
